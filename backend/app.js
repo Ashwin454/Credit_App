@@ -8,7 +8,8 @@ const adminRouter= require("./routes/adminRoutes");
 const verifierRouter=require("./routes/verifierRoutes");
 
 app.use(cors({
-    origin: 'http://localhost:3000', // Adjust as needed
+    origin: ['https://credit-app-frontend.onrender.com', 'http://localhost:3000'],
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true
 }));
 app.use(express.json());
