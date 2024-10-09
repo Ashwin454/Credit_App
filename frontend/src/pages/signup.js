@@ -1,22 +1,18 @@
-import React, { useContext, useState, useRef, useEffect } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import './signup.css';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import { AppContext } from '../context/UserContext';
-import { toast } from 'react-toastify';
 import Swal from 'sweetalert2';
 
 const SignupForm = () => {
   const navigate = useNavigate();
-  const [serverErrorMessage, setServerErrorMessage] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPass, setConfirmPass] = useState('');
   const [name, setName] = useState('');
-  const [photo, setPhoto] = useState(null);
   const [loading, setLoading] = useState(false);
   const { user, setUser } = useContext(AppContext);
-  const formRef = useRef(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -46,7 +42,7 @@ const SignupForm = () => {
       })
       navigate("/verify-email");
     }
-  }, [user])
+  }, [user, navigate])
   return (
     <div className="pageContainer">
       <div className="formWrapper">
@@ -120,13 +116,11 @@ const SignupForm = () => {
               type="file"
               id="photo"
               name="photo"
-              onChange={(e) => setPhoto(e.target.files[0])}
               className="input"
               accept="image/*"
             />
           </div>
 
-          {serverErrorMessage && <p className="error">{serverErrorMessage}</p>}
           <button
             type="submit"
             className={`submitButton ${loading ? 'buttonDisabled' : ''}`}

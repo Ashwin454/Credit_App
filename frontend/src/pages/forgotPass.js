@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import './forgotPass.css';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
@@ -7,7 +7,6 @@ import axios from 'axios';
 export default function ForgotPassword() {
     const navigate=useNavigate();
     const [email, setEmail]=useState('');
-    const formRef = useRef(null);
     const formData={
       email
     }

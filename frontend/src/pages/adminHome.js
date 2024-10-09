@@ -8,7 +8,6 @@ import Swal from 'sweetalert2';
 const Dashboard = () => {
    
     const navigate=useNavigate()
-    const [loading, setLoading] = useState(false);
     const [loading1, setLoading1] = useState(false);
     const [loans, setLoans]=useState([]);
     const [currentPage, setCurrentPage] = useState(1);
@@ -21,10 +20,10 @@ const Dashboard = () => {
             navigate('/login');
         }
         fetchLoans();
-    }, []);
+    }, [navigate, user]);
     useEffect(()=>{
         fetchUsers();
-    }, [loading1])
+    }, [loading1, navigate, user])
     const getStatusColor = (status) => {
         if (status === "pending") {
             return "bg-yellow-500";
@@ -85,7 +84,7 @@ const Dashboard = () => {
         setUser(null); // Clear user from context
         localStorage.removeItem("user"); // Remove token from local storage
         try {
-            const response = await axios.post("https://credit-app-backend.onrender.com/api/v1/logout", {}, {withCredentials: true});
+            await axios.post("https://credit-app-backend.onrender.com/api/v1/logout", {}, {withCredentials: true});
         } catch (error) {
         }
         navigate("/login"); // Redirect to login page
@@ -136,7 +135,7 @@ const Dashboard = () => {
         const userId = user._id;
         setLoading1(true);
         try {
-            const response = await axios.post("https://credit-app-backend.onrender.com/api/v1/admin/createVerifier", { userId });
+            await axios.post("https://credit-app-backend.onrender.com/api/v1/admin/createVerifier", { userId });
             fetchUsers(); 
         } catch (error) {
             Swal.fire({
@@ -172,23 +171,23 @@ const Dashboard = () => {
             </div>
             <nav>
                 <ul>
-                    <li className="mb-4"><a href="#" className="flex items-center"><i className="fas fa-tachometer-alt mr-2"></i> Dashboard</a></li>
-                    <li className="mb-4"><a href="#" className="flex items-center"><i className="fas fa-users mr-2"></i> Borrowers</a></li>
-                    <li className="mb-4"><a href="#" className="flex items-center"><i className="fas fa-money-check-alt mr-2"></i> Loans</a></li>
-                    <li className="mb-4"><a href="#" className="flex items-center"><i className="fas fa-undo-alt mr-2"></i> Repayments</a></li>
-                    <li className="mb-4"><a href="#" className="flex items-center"><i className="fas fa-cogs mr-2"></i> Loan Parameters</a></li>
-                    <li className="mb-4"><a href="#" className="flex items-center"><i className="fas fa-book mr-2"></i> Accounting</a></li>
-                    <li className="mb-4"><a href="#" className="flex items-center"><i className="fas fa-chart-line mr-2"></i> Reports</a></li>
-                    <li className="mb-4"><a href="#" className="flex items-center"><i className="fas fa-shield-alt mr-2"></i> Collateral</a></li>
-                    <li className="mb-4"><a href="#" className="flex items-center"><i className="fas fa-lock mr-2"></i> Access Configuration</a></li>
-                    <li className="mb-4"><a href="#" className="flex items-center"><i className="fas fa-piggy-bank mr-2"></i> Savings</a></li>
-                    <li className="mb-4"><a href="#" className="flex items-center"><i className="fas fa-coins mr-2"></i> Other Incomes</a></li>
-                    <li className="mb-4"><a href="#" className="flex items-center"><i className="fas fa-file-invoice-dollar mr-2"></i> Payroll</a></li>
-                    <li className="mb-4"><a href="#" className="flex items-center"><i className="fas fa-receipt mr-2"></i> Expenses</a></li>
-                    <li className="mb-4"><a href="#" className="flex items-center"><i className="fas fa-signature mr-2"></i> E-signature</a></li>
-                    <li className="mb-4"><a href="#" className="flex items-center"><i className="fas fa-user-tie mr-2"></i> Investor Accounts</a></li>
-                    <li className="mb-4"><a href="#" className="flex items-center"><i className="fas fa-calendar-alt mr-2"></i> Calendar</a></li>
-                    <li className="mb-4"><a href="#" className="flex items-center"><i className="fas fa-cog mr-2"></i> Settings</a></li>
+                    <li className="mb-4"><a href="/nothing" className="flex items-center"><i className="fas fa-tachometer-alt mr-2"></i> Dashboard</a></li>
+                    <li className="mb-4"><a href="/nothing" className="flex items-center"><i className="fas fa-users mr-2"></i> Borrowers</a></li>
+                    <li className="mb-4"><a href="/nothing" className="flex items-center"><i className="fas fa-money-check-alt mr-2"></i> Loans</a></li>
+                    <li className="mb-4"><a href="/nothing" className="flex items-center"><i className="fas fa-undo-alt mr-2"></i> Repayments</a></li>
+                    <li className="mb-4"><a href="/nothing" className="flex items-center"><i className="fas fa-cogs mr-2"></i> Loan Parameters</a></li>
+                    <li className="mb-4"><a href="/nothing" className="flex items-center"><i className="fas fa-book mr-2"></i> Accounting</a></li>
+                    <li className="mb-4"><a href="/nothing" className="flex items-center"><i className="fas fa-chart-line mr-2"></i> Reports</a></li>
+                    <li className="mb-4"><a href="/nothing" className="flex items-center"><i className="fas fa-shield-alt mr-2"></i> Collateral</a></li>
+                    <li className="mb-4"><a href="/nothing" className="flex items-center"><i className="fas fa-lock mr-2"></i> Access Configuration</a></li>
+                    <li className="mb-4"><a href="/nothing" className="flex items-center"><i className="fas fa-piggy-bank mr-2"></i> Savings</a></li>
+                    <li className="mb-4"><a href="/nothing" className="flex items-center"><i className="fas fa-coins mr-2"></i> Other Incomes</a></li>
+                    <li className="mb-4"><a href="/nothing" className="flex items-center"><i className="fas fa-file-invoice-dollar mr-2"></i> Payroll</a></li>
+                    <li className="mb-4"><a href="/nothing" className="flex items-center"><i className="fas fa-receipt mr-2"></i> Expenses</a></li>
+                    <li className="mb-4"><a href="/nothing" className="flex items-center"><i className="fas fa-signature mr-2"></i> E-signature</a></li>
+                    <li className="mb-4"><a href="/nothing" className="flex items-center"><i className="fas fa-user-tie mr-2"></i> Investor Accounts</a></li>
+                    <li className="mb-4"><a href="/nothing" className="flex items-center"><i className="fas fa-calendar-alt mr-2"></i> Calendar</a></li>
+                    <li className="mb-4"><a href="/nothing" className="flex items-center"><i className="fas fa-cog mr-2"></i> Settings</a></li>
                 </ul>
             </nav>
         </div>

@@ -12,7 +12,6 @@ import {
     FormControl,
     FormLabel,
     useDisclosure,
-    useStatStyles,
     Checkbox,
     Select,
 } from "@chakra-ui/react";  
@@ -35,7 +34,6 @@ const UserHome = () => {
     const [consentClause1, setConsentClause1] = useState(false);
     const [consentClause2, setConsentClause2] = useState(false);
     const [loan, setLoan]=useState({});
-    const [loading, setLoading]=useState(false);
     const [loans, setLoans]=useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const entriesPerPage = 7; 
@@ -60,7 +58,7 @@ const UserHome = () => {
         };
 
         fetchLoans();
-    }, [loan])
+    }, [loan, user, navigate])
 
     useEffect(() => {
         const fetchFilteredLoans = async () => {
@@ -76,7 +74,7 @@ const UserHome = () => {
         };
 
         fetchFilteredLoans();
-    }, [searchTerm, loans]);
+    }, [searchTerm, loans, navigate, user]);
 
     const indexOfLastEntry = currentPage * entriesPerPage;
     const indexOfFirstEntry = indexOfLastEntry - entriesPerPage;
@@ -99,7 +97,6 @@ const UserHome = () => {
     const handleFormSubmit = async (e) => {
         
         e.preventDefault();
-        setLoading(true);
 
         try {
             const formData = {name, loanAmount, loanReason, loanTenure, empStatus, empAddress, consentClause1, consentClause2};
@@ -112,7 +109,6 @@ const UserHome = () => {
                 text: error.response?.data?.message || 'An unexpected error occurred'
             })
         } finally{
-            setLoading(false);
         }
         onClose();
       };    
@@ -130,7 +126,7 @@ const UserHome = () => {
         setUser(null);
         localStorage.removeItem("user");
         try {
-            const response = await axios.post("https://credit-app-backend.onrender.com/api/v1/logout", {}, {withCredentials: true});
+            await axios.post("https://credit-app-backend.onrender.com/api/v1/logout", {}, {withCredentials: true});
         } catch (error) {
           Swal.fire({
             icon: 'error',
@@ -145,11 +141,11 @@ const UserHome = () => {
             <header className="bg-white shadow p-4 flex justify-between items-center">
                 <div className="text-xl font-bold text-green-700">CREDIT APP</div>
                 <nav className="flex space-x-6 items-center">
-                    <a href="#" className="text-green-700 flex items-center"><i className="fas fa-home mr-2"></i>Home</a>
-                    <a href="#" className="text-gray-600 flex items-center"><i className="fas fa-money-check-alt mr-2"></i>Payments</a>
-                    <a href="#" className="text-gray-600 flex items-center"><i className="fas fa-wallet mr-2"></i>Budget</a>
-                    <a href="#" className="text-gray-600 flex items-center"><i className="fas fa-credit-card mr-2"></i>Card</a>
-                    <a href="#" className="text-gray-600 flex items-center"><i className="fas fa-bell mr-2"></i></a>
+                    <a href='/nothing' className="text-green-700 flex items-center"><i className="fas fa-home mr-2"></i>Home</a>
+                    <a href='/nothing' className="text-gray-600 flex items-center"><i className="fas fa-money-check-alt mr-2"></i>Payments</a>
+                    <a href='/nothing' className="text-gray-600 flex items-center"><i className="fas fa-wallet mr-2"></i>Budget</a>
+                    <a href='/nothing' className="text-gray-600 flex items-center"><i className="fas fa-credit-card mr-2"></i>Card</a>
+                    <a href='/nothing' className="text-gray-600 flex items-center"><i className="fas fa-bell mr-2"></i></a>
                     <a href="/login" className="text-gray-600 flex items-center"><i className="fas fa-user mr-2"></i>{user ? user.name: "User"}</a>
                     <Button onClick={logout} colorScheme="red" variant="outline">
                         Logout
@@ -306,7 +302,7 @@ const UserHome = () => {
                                     {currentLoans.map((loan, index) => (
                                         <tr key={index} className="border-b">
                                             <td className="p-4 flex items-center">
-                                                <img src="https://placehold.co/40x40" alt="Profile picture of John Okoh" className="rounded-full mr-4"/>
+                                                <img src="https://placehold.co/40x40" className="rounded-full mr-4" alt=""/>
                                                 <div>
                                                     <div className="font-medium">{loan?.verifier?.user?.name ? loan.verifier.user.name : ""}</div>
                                                 </div>

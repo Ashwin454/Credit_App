@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import AppliedLoans from "./AppliedLoans";
 import DashboardCard from "./DashboardCard";
 

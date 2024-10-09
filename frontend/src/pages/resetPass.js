@@ -1,6 +1,5 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import "./login.css"
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -10,17 +9,12 @@ export default function ResetPass() {
   const navigate=useNavigate();
   const [password, setPassword]=useState('');
   const [confirmPass, setConfirmPass]=useState('');
-  const formRef = useRef(null);
   const formData={
     password,
     confirmPass
   }
   const [loading, setLoading]=useState(false);
   const token=useParams();
-  const formData1={
-    token,
-    formData
-  }
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);

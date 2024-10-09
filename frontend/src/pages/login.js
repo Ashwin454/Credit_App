@@ -33,7 +33,7 @@ const Login = () => {
     if(user){
       navigate("/");
     }
-  }, [user])
+  }, [user, navigate])
   return (
     <div className="container">
       <div className="loginBox">

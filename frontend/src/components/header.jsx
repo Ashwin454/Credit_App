@@ -6,13 +6,13 @@ import Swal from "sweetalert2";
 import { AppContext } from "../context/UserContext";
 
 function Header() {
-    const {user, setUser} = useContext(AppContext);
+    const {setUser} = useContext(AppContext);
     const navigate=useNavigate();
     const logout = async () => {
         setUser(null);
         localStorage.removeItem("user");
         try {
-            const response = await axios.post("https://credit-app-backend.onrender.com/api/v1/logout", {}, {withCredentials: true});
+            await axios.post("https://credit-app-backend.onrender.com/api/v1/logout", {}, {withCredentials: true});
         } catch (error) {
             Swal.fire({
                 icon: 'error',

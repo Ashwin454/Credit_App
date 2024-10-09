@@ -27,7 +27,7 @@ function VerifierHome() {
             }
         };
         fetchLoans();
-    }, [])
+    }, [navigate, user])
     return (
         <div className="flex">
             <Sidebar user={user}/>

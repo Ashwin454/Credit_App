@@ -43,7 +43,7 @@ function AppliedLoans({ user }) {
         const verificationStatus = e.target.value;
         setLoading(true);
         try {
-            const response = await axios.post("https://credit-app-backend.onrender.com/api/v1/verifier/updateVerificationStatus", { loanId, verificationStatus });
+            await axios.post("https://credit-app-backend.onrender.com/api/v1/verifier/updateVerificationStatus", { loanId, verificationStatus });
             fetchLoans(); 
         } catch (error) {
             Swal.fire({

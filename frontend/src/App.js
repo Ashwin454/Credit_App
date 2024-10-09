@@ -12,6 +12,7 @@ import { ChakraProvider } from "@chakra-ui/react";
 import Dashboard from "./pages/adminHome";
 import { useContext } from "react"; 
 import { AppContext } from "./context/UserContext";
+import Nothing from "./pages/nothing";
 
 const Main = () => {
   const { user } = useContext(AppContext);
@@ -39,6 +40,7 @@ const Main = () => {
         <Route path="/verify-email" element={<VerifyEmail />} />
         <Route path="/forgotPass" element={<ForgotPassword />} />
         <Route path="/resetPass/:token" element={<ResetPass />} />
+        <Route path="/nothing" element={<Nothing/>}></Route>
       </Routes>
     </Router>
   );
