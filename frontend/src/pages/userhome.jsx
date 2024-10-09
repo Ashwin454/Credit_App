@@ -46,7 +46,9 @@ const UserHome = () => {
         }
         const fetchLoans = async () => {
             try {
-                const response = await axios.get("https://credit-app-backend.onrender.com/api/v1/getLoans");
+                const response = await axios.get("https://credit-app-backend.onrender.com/api/v1/getLoans", {
+                  withCredentials: true, // Include credentials in the request
+              });
                 setLoans(response.data.loans);
             } catch (error) {
                 Swal.fire({

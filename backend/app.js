@@ -7,6 +7,8 @@ const router = require("./routes/userRoutes");
 const adminRouter= require("./routes/adminRoutes");
 const verifierRouter=require("./routes/verifierRoutes");
 
+app.set('trust proxy', true);
+
 app.use(cors({
     origin: ['https://credit-app-frontend.onrender.com', 'http://localhost:3000'],
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
