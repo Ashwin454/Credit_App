@@ -3,6 +3,7 @@ const user = require("../models/userModels.js");
 exports.isAuthenticated = async (req, res, next) => {
     try {
        const token = req.cookies.token;
+       console.log(token);
        if(token=="j:null"){
             return res.status(401).json({
                 success:false,
