@@ -46,13 +46,16 @@ exports.registerUser=async(req, res, next)=>{
         sendEmailVerificationOTP(req, user1);
         const token=await JWT.sign({id: user1._id, email: user1.email},process.env.JWT_SECRET , {expiresIn: '200h'});
         const option={
-            httpOnly:true,
+            httpOnly:false,
+            secure: true,
+            sameSite:"none",
             expires:new Date(Date.now() + 200*60*60*1000)
         }
         req.user=user1;
         res.cookie('is_auth', true, {
             httpOnly:false,
             secure:true,
+            sameSite:"none",
             expires:new Date(Date.now() + 200*60*60*1000)
         })
         return res.status(200).cookie('token',token, option).json({
@@ -153,6 +156,7 @@ exports.loginUser = async (req, res, next) => {
         const option = {
             httpOnly: false,
             secure: true,  
+            sameSite: "none",
             expires: new Date(Date.now() + 200 * 60 * 60 * 1000) 
         };
 
@@ -160,6 +164,7 @@ exports.loginUser = async (req, res, next) => {
         res.cookie('is_auth', true, {
             httpOnly: false,
             secure: true,
+            sameSite: "none",
             expires: new Date(Date.now() + 200 * 60 * 60 * 1000)
         });
 
@@ -180,12 +185,14 @@ exports.logoutUser = async (req, res, next) => {
         res.cookie('token', null, {
             httpOnly: false,
             secure: true, 
+            sameSite: "none",
             expires: new Date(Date.now()) 
         });
 
         res.cookie('is_auth', false, {
             httpOnly: false, 
             secure: true, 
+            sameSite: "none",
             expires: new Date(Date.now()) 
         });
 
