@@ -19,8 +19,7 @@ export default function VerifyEmail() {
     setLoading(true);
     // console.log(formData);
     try {
-      const response=await axios.post("http://localhost:9000/api/v1/verify-email", formData);
-      console.log(response);
+      const response=await axios.post("https://credit-app-backend.onrender.com/api/v1/verify-email", formData);
       if(response?.data?.success){
         setLoading(false);
         navigate('/');

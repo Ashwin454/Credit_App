@@ -57,7 +57,7 @@ const Dashboard = () => {
     };
     const fetchLoans = async () => {
         try {
-            const response = await axios.get("http://localhost:9000/api/v1/admin/getAllLoans");
+            const response = await axios.get("https://credit-app-backend.onrender.com/api/v1/admin/getAllLoans");
             setLoans(response.data.loans);
         } catch (error) {
             
@@ -70,12 +70,10 @@ const Dashboard = () => {
     };
     const fetchUsers = async ()=>{
         try{
-            const response=await axios.get("http://localhost:9000/api/v1/admin/getAllUsers");
-            console.log(response);
+            const response=await axios.get("https://credit-app-backend.onrender.com/api/v1/admin/getAllUsers");
             const data=response.data.users;
             setUsers(data);
         }catch(error){
-            console.log(error);
             Swal.fire({
                 icon: 'error',
                 title: "Error fetching Users",
@@ -87,9 +85,8 @@ const Dashboard = () => {
         setUser(null); // Clear user from context
         localStorage.removeItem("user"); // Remove token from local storage
         try {
-            const response = await axios.post("http://localhost:9000/api/v1/logout", {}, {withCredentials: true});
+            const response = await axios.post("https://credit-app-backend.onrender.com/api/v1/logout", {}, {withCredentials: true});
         } catch (error) {
-            console.log(error);
         }
         navigate("/login"); // Redirect to login page
     };   
@@ -139,7 +136,7 @@ const Dashboard = () => {
         const userId = user._id;
         setLoading1(true);
         try {
-            const response = await axios.post("http://localhost:9000/api/v1/admin/createVerifier", { userId });
+            const response = await axios.post("https://credit-app-backend.onrender.com/api/v1/admin/createVerifier", { userId });
             fetchUsers(); 
         } catch (error) {
             Swal.fire({

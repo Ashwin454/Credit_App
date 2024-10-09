@@ -3,7 +3,6 @@ import AppliedLoans from "./AppliedLoans";
 import DashboardCard from "./DashboardCard";
 
 function Dashboard({user, loans}) {
-    console.log(loans);
     const uniqueApplicants = new Set();
     let sum = 0;
     let sum1 = 0;

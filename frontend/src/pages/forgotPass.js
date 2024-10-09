@@ -16,8 +16,7 @@ export default function ForgotPassword() {
       e.preventDefault();
       setLoading(true);
       try {
-        const response=await axios.post("http://localhost:9000/api/v1/forgotPass", formData);
-        console.log(response);
+        const response=await axios.post("https://credit-app-backend.onrender.com/api/v1/forgotPass", formData);
         if(response.data && response.data.success){
           setLoading(false);
           navigate('/login');
@@ -28,7 +27,6 @@ export default function ForgotPassword() {
           setEmail('');
         }
       } catch (error) {
-        console.log(error);
         Swal.fire({
             icon: 'error',
             title: 'Failed to send email',

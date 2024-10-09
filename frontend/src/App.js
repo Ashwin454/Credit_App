@@ -1,4 +1,3 @@
-// App.js
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import UserHome from "./pages/userhome";
@@ -11,14 +10,13 @@ import ForgotPassword from "./pages/forgotPass";
 import ResetPass from "./pages/resetPass";
 import { ChakraProvider } from "@chakra-ui/react";
 import Dashboard from "./pages/adminHome";
-import { useContext } from "react"; // Import useContext
-import { AppContext } from "./context/UserContext"; // Import AppContext
+import { useContext } from "react"; 
+import { AppContext } from "./context/UserContext";
 
 const Main = () => {
-  const { user } = useContext(AppContext); // Use context here after AppProvider
+  const { user } = useContext(AppContext);
   const role = user ? user.role : 0;
 
-  // Function to determine which component to render based on role
   const getHomePage = () => {
     switch (role) {
       case 1:
@@ -28,7 +26,7 @@ const Main = () => {
       case 2:
         return <Dashboard />;
       default:
-        return <UserHome />; // Fallback case for unknown role
+        return <UserHome />;
     }
   };
 

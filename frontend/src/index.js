@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import Swal from 'sweetalert2';
 import axios from "axios";
 
-axios.defaults.withCredentials = true; // Enable sending credentials with Axios requests
+axios.defaults.withCredentials = true;
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

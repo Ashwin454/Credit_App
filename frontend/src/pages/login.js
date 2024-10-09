@@ -15,7 +15,7 @@ const Login = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await axios.post("http://localhost:9000/api/v1/login", { email, password }, {withCredentials: true});
+      const response = await axios.post("https://credit-app-backend.onrender.com/api/v1/login", { email, password }, {withCredentials: true});
       if(response.data.success){
         setUser(response.data.user1); 
       }
@@ -25,7 +25,6 @@ const Login = () => {
         title: 'Login Failed',
         text: error.response?.data?.message || 'An unexpected error occurred',
       })
-      console.log(error);
     } finally {
       setLoading(false);
     }

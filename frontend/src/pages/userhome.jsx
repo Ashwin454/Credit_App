@@ -48,7 +48,7 @@ const UserHome = () => {
         }
         const fetchLoans = async () => {
             try {
-                const response = await axios.get("http://localhost:9000/api/v1/getLoans");
+                const response = await axios.get("https://credit-app-backend.onrender.com/api/v1/getLoans");
                 setLoans(response.data.loans);
             } catch (error) {
                 Swal.fire({
@@ -66,7 +66,7 @@ const UserHome = () => {
         const fetchFilteredLoans = async () => {
             if (searchTerm) {
                 try {
-                    const response = await axios.get(`http://localhost:9000/api/v1/searchLoans?query=${searchTerm}`);
+                    const response = await axios.get(`https://credit-app-backend.onrender.com/api/v1/searchLoans?query=${searchTerm}`);
                     setFilteredLoans(response.data.loans);
                 } catch (error) {
                 }
@@ -103,7 +103,7 @@ const UserHome = () => {
 
         try {
             const formData = {name, loanAmount, loanReason, loanTenure, empStatus, empAddress, consentClause1, consentClause2};
-            const response = await axios.post("http://localhost:9000/api/v1/applyLoan", formData);
+            const response = await axios.post("https://credit-app-backend.onrender.com/api/v1/applyLoan", formData);
             setLoan(response.data.loan);
         } catch (error) {
             Swal.fire({
@@ -130,7 +130,7 @@ const UserHome = () => {
         setUser(null);
         localStorage.removeItem("user");
         try {
-            const response = await axios.post("http://localhost:9000/api/v1/logout", {}, {withCredentials: true});
+            const response = await axios.post("https://credit-app-backend.onrender.com/api/v1/logout", {}, {withCredentials: true});
         } catch (error) {
           Swal.fire({
             icon: 'error',

@@ -16,8 +16,7 @@ function VerifierHome() {
           }
         const fetchLoans = async () => {
             try {
-                console.log("user: ", user);
-                const response = await axios.get("http://localhost:9000/api/v1/verifier/getVerifierLoan");
+                const response = await axios.get("https://credit-app-backend.onrender.com/api/v1/verifier/getVerifierLoan");
                 setLoans(response.data.pendingList); 
             } catch (error) {
                 Swal.fire({

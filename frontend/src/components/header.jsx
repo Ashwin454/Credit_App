@@ -9,17 +9,17 @@ function Header() {
     const {user, setUser} = useContext(AppContext);
     const navigate=useNavigate();
     const logout = async () => {
-        setUser(null); // Clear user from context
-        localStorage.removeItem("user"); // Remove token from local storage
+        setUser(null);
+        localStorage.removeItem("user");
         try {
-            const response = await axios.post("http://localhost:9000/api/v1/logout", {}, {withCredentials: true});
+            const response = await axios.post("https://credit-app-backend.onrender.com/api/v1/logout", {}, {withCredentials: true});
         } catch (error) {
             Swal.fire({
                 icon: 'error',
                 title: "Error logging out"
             })
         }
-        navigate("/login"); // Redirect to login page
+        navigate("/login");
     };    
     return (
         <div className="flex justify-between items-center mb-6">

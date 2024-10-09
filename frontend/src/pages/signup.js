@@ -24,7 +24,7 @@ const SignupForm = () => {
 
 
     try {
-      const response = await axios.post("http://localhost:9000/api/v1/register", {name, email, password, confirmPass});
+      const response = await axios.post("https://credit-app-backend.onrender.com/api/v1/register", {name, email, password, confirmPass});
       if (response.data.success) {
         setUser(response.data.user1);
       }

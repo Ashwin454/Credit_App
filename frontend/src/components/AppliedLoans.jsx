@@ -10,12 +10,12 @@ function AppliedLoans({ user }) {
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        fetchLoans(); // Fetch loans when component mounts or when loading changes
+        fetchLoans();
     }, [loading]);
 
     const fetchLoans = async () => {
         try {
-            const response = await axios.get("http://localhost:9000/api/v1/verifier/getVerifierLoan");
+            const response = await axios.get("https://credit-app-backend.onrender.com/api/v1/verifier/getVerifierLoan");
             setLoans(response.data.pendingList);
         } catch (error) {
             Swal.fire({
@@ -40,10 +40,10 @@ function AppliedLoans({ user }) {
 
     const handleStatusChange = async (e, loan) => {
         const loanId = loan._id;
-        const verificationStatus = e.target.value; // Directly get the status from the event
+        const verificationStatus = e.target.value;
         setLoading(true);
         try {
-            const response = await axios.post("http://localhost:9000/api/v1/verifier/updateVerificationStatus", { loanId, verificationStatus });
+            const response = await axios.post("https://credit-app-backend.onrender.com/api/v1/verifier/updateVerificationStatus", { loanId, verificationStatus });
             fetchLoans(); 
         } catch (error) {
             Swal.fire({
@@ -64,7 +64,7 @@ function AppliedLoans({ user }) {
         } else if (status === "not_verified") {
             return "bg-red-500";
         }
-        return "bg-gray-500"; // default/fallback color
+        return "bg-gray-500";
     };
 
     const indexOfLastEntry = currentPage * entriesPerPage;
@@ -75,7 +75,7 @@ function AppliedLoans({ user }) {
     return (
         <div className="bg-white p-6 rounded shadow">
             {loading ? (
-                <Loader /> // Display Loader when loading
+                <Loader />
             ) : (
                 <>
                     <h2 className="text-xl font-bold mb-4">Applied Loans</h2>
